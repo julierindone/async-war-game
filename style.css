@@ -1,0 +1,88 @@
+:root {
+	--white: #f8f8f8;
+	--black-accent: #000000dd;
+	--btn-color: rgb(149, 149, 149);
+	--black-text-shadow:
+		1.25px 1.25px .25px var(--black-accent),
+		0.1px -0.1px 0 var(--black-accent),
+		-0.15px 0.15px 0 var(--black-accent),
+		-0.1px -0.1px 0 var(--black-accent);
+	--borders: 1.5px solid var(--black-accent)
+		/* --black-border: solid .2px var(--black-accent); */
+		/* --max-width: 900px; */
+		/* --black: #151515; */
+		/* --input-font-size: clamp(1.15rem, -0.1rem + 2.7vw, 1.38rem); */
+		/* --container-input-font-size: clamp(1.15rem, 8.5cqw, 1.34rem); */
+}
+
+body {
+	padding: 2rem 1rem;
+	background-color: rgb(77, 153, 107);
+}
+
+p {
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	font-weight: 500;
+	background-color: var(--white);
+	border: var(--borders);
+	border-radius: .25em;
+	padding-block: .7em;
+	margin-inline: auto;
+}
+
+.players-wrapper {
+	display: flex;
+	justify-content: center;
+	column-gap: 2em;
+	margin-top: 1em;
+}
+
+.new-card-code {
+	font-size: 1.2rem;
+}
+
+.player-cards {
+	width: min(30vw, 200px);
+}
+
+img {
+		width: 100%;
+	}
+
+.btn {
+	display: block;
+	color: var(--white);
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 600;
+	font-size: clamp(.9rem, -0.05rem + 2.7vw, 1.25rem);
+	font-variant: all-petite-caps;
+	letter-spacing: 0.025em;
+	text-shadow: var(--black-text-shadow);
+	border: 1px solid #686868;
+	border-radius: 1rem;
+	transition: background 0.3s ease;
+	background: linear-gradient(to bottom, var(--btn-color), color-mix(in srgb, var(--btn-color), black 65%));
+	word-spacing: 0.04em;
+	width: min(65%,  15em);
+	padding: .72em;
+	margin: 1.5em auto 1em;
+}
+
+.btn:hover {
+	background: linear-gradient(to bottom, color-mix(in srgb, var(--btn-color), black 20%), color-mix(in srgb, var(--btn-color), black 64%));
+}
+
+.btn:active {
+	transform: translateY(1px);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	background: linear-gradient(to bottom, color-mix(in srgb, var(--btn-color), black 30%), color-mix(in srgb, var(--btn-color), black 74%));
+}
+
+.draw-two {
+
+}
+
+.hidden {
+	display: none;
+}
