@@ -1,9 +1,10 @@
 let deckId;
 let cardsInPlay = [];
 
+const newDeck = document.getElementById('new-deck')
 const drawTwoBtn = document.getElementById('draw-two');
 
-document.getElementById('new-deck').addEventListener('click', handleClick)
+newDeck.addEventListener('click', handleClick)
 drawTwoBtn.addEventListener('click', drawTwo)
 
 function handleClick() {
@@ -14,7 +15,12 @@ function handleClick() {
       cardsInPlay = drawTwo()
       return cardsInPlay
     })
+    .then(() => {
+      drawTwoBtn.classList.remove('hidden')
+      document.getElementById('players-wrapper').classList.remove('hidden')
+      newDeck.innerText = "New Deck"
     .then(() => drawTwoBtn.classList.remove('hidden'))
+    })
 }
 
 function drawTwo() {
@@ -22,14 +28,18 @@ function drawTwo() {
     .then(res => res.json())
     .then(data => {
       cardsInPlay = data.cards
-      document.getElementById('player-1').innerHTML = `
-        <p class="new-card-code">${cardsInPlay[0].code}</p>
-        <img src="${cardsInPlay[0].image}" />
-        `
-
-      document.getElementById('player-2').innerHTML = `
-        <p class="new-card-code">${cardsInPlay[1].code}</p>
-        <img src="${cardsInPlay[1].image}" />
-        `
+      if (!(document.querySelector('.card-image'))) {
+        document.querySelectorAll('.player').forEach((instance, i) => {
+          let imageEl = document.createElement('img')
+          imageEl.src = `${cardsInPlay[i].image}`
+          imageEl.classList.add('card-image')
+          instance.appendChild(imageEl)
+        })
+      }
+      else {
+        document.querySelectorAll('.card-image').forEach((instance, i) => {
+          instance.src = `${cardsInPlay[i].image}`
+        })
+      }
     })
-  }
+}

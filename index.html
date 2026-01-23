@@ -3,17 +3,37 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="reset.css">
 	<link rel="stylesheet" href="style.css">
 	<title>WAR</title>
 </head>
 
 <body>
-	<button id="new-deck" class="btn">Click for new deck!</button>
-	<div class="players-wrapper">
-		<div id="player-1" class="player-cards"></div>
-		<div id="player-2" class="player-cards"></div>
-	</div>
-	<button id="draw-two" class="btn hidden">Draw two cards</button>
-<script src="index.js"></script>
+	<header>
+		<p class="subheading">LET'S<span class="break"><br></span>PLAY</p>
+		<h1>WAR</h1>
+	</header>
+	<main>
+		<div id="players-wrapper" class="hidden">
+			<div id="player-1" class="player">
+				<p>Player 1</p>
+			</div>
+			<div id="player-2" class="player">
+				<p>Player 2</p>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<div class="button-wrapper">
+			<button id="draw-two" class="btn hidden">Draw two cards</button>
+			<button id="new-deck" class="btn">start</button>
+		</div>
+	</footer>
+	<script src="index.js"></script>
 </body>
 </html>
