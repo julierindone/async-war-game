@@ -1,13 +1,13 @@
 :root {
 	--title-font: "Black Ops One", system-ui;
 	--thin-font: "Quantico", sans-serif;
-	--medium-font-size: clamp(1.15rem, 0.2rem + 6.5vw, 2.9rem);
+	--medium-font-size: clamp(1rem, 0.18rem + 5.3vw, 2.8rem);
 	--white: #ececec;
 	--black: #121212cc;
 	--red: hsl(345deg 100% 32.24% / 85%);
 	--black-accent: #000000dd;
-	--header-color: hsl(345, 49%, 12%);
-	--btn-color: hsl(345, 49%, 18%);
+	--header-color: hsl(345, 49%, 16%);
+	--btn-color: hsl(345, 49%, 20%);
 	--black-text-shadow:
 		.75px .75px .25px #333,
 		0.1px -0.1px 0 #333,
@@ -26,28 +26,26 @@ body {
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	gap: 1rem;
+	gap: 0.3rem;
+	padding: 2.5dvh 1rem;
 	background-color: rgb(77, 153, 107);
 	background: url('images/table.png') no-repeat center / cover;
-	padding: 2.5dvh 1rem;
-	grid-template-rows: min-content;
 }
 
 header,
 main,
 footer {
-	max-width: 900px;
+	width: min(100%, 900px);
 }
 
 header {
 	display: flex;
 	flex-direction: column;
-	gap: 1em 2.2vw;
-	margin-top: .25rem;
+	gap: .7em 2.3vw;
 }
 
 main {
-	flex: 1 auto 20%;
+	/* ensures main takes up the all the remaining space between header and footer */
 	flex: 1 1;
 	font-size: var(--medium-font-size);
 	height: 40vh;
@@ -73,9 +71,10 @@ p {
 
 h1 {
 	font-family: var(--title-font);
-	font-size: clamp(1.5rem, -0.2rem + 33.5vw, 12em);
+	font-size: clamp(1.5rem, -0.2rem + 33.5vw, 13em);
 	text-align: center;
-	margin: 0;
+	margin: 0 0 -0.02em 0;
+	/* compensates for massive space under letters */
 }
 
 h1,
@@ -83,6 +82,13 @@ p.subheading {
 	font-weight: 400;
 	color: var(--header-color);
 	line-height: .725;
+}
+
+p.subheading {
+	font-family: var(--thin-font);
+	font-size: clamp(1rem, 9.3vw, 3.3em);
+	letter-spacing: 0.03em;
+	-webkit-text-stroke: 1.3px var(--header-color);
 }
 
 span.break {
@@ -168,7 +174,7 @@ img.card-image {
 	height: 46px;
 	padding: .1em .25em;
 	/* REMOVE - scrimba only */
-	/* margin-top: .5rem; */
+	margin-top: .5rem;
 }
 
 .btn:hover {
@@ -181,14 +187,10 @@ img.card-image {
 	background: linear-gradient(to bottom, color-mix(in srgb, var(--btn-color), black 30%), color-mix(in srgb, var(--btn-color), black 74%));
 }
 
-.draw-two {
-
-}
 
 .hidden {
 	display: none !important;
 }
-
 
 /* =============================
 		MEDIA QUERIES
@@ -196,18 +198,18 @@ img.card-image {
 
 @media (width > 560px) {
 
+	body {
+		padding-inline: 5vw;
+	}
+
 	header {
 		flex-direction: row;
 		align-items: center;
 		justify-content: center;
 	}
 
-	h1, p {
-		line-height: 0.85;
-	}
-
 	h1 {
-		font-size: clamp(8.2rem, 0.7rem + 21.5vw, 12em);
+		font-size: clamp(8.2rem, 0.7rem + 21.5vw, 13.1em);
 	}
 
 	span.break {
@@ -217,9 +219,10 @@ img.card-image {
 
 	p.subheading {
 		font-family: var(--title-font);
-		font-size: clamp(3.6rem, 0.45em + 8.5vw, 5.6em);
+		font-size: clamp(3.6rem, 0.45em + 8.5vw, 5.4em);
 		letter-spacing: unset;
 		-webkit-text-stroke: unset;
+		line-height: 0.9;
 		margin: 0;
 	}
 
@@ -234,9 +237,34 @@ img.card-image {
 		/* min-height: 55px; */
 		margin-inline: auto;
 	}
+}
+
+@media (min-aspect-ratio: 1/1) {
+	:root {
+		--medium-font-size: clamp(1.15rem, 0.2rem + 5.3vw, 2.3rem);
+	}
+
+	body {
+		padding-block: 1.2.05vh;
+		gap: 0.4em;
+	}
+
+	h1 {
+		font-size: clamp(8.2rem, 0.7rem + 21.5vw, 7em);
+	}
+
+	p.subheading {
+		font-size: clamp(3.6rem, 0.45em + 6.5vw, 3.8em);
+	}
 
 	#players-wrapper {
-		column-gap: min(5%, 200px);
+		width: 74%;
+		gap: 1.8em;
+	}
+
+	footer {
+		/* for scrimba */
+		max-width: 600px;
 	}
 }
 
