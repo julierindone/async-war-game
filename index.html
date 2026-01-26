@@ -19,18 +19,24 @@
 		<h1>WAR</h1>
 	</header>
 	<main>
-		<div id="players-wrapper" class="hidden">
-			<div id="player-1" class="player">
-				<p>Player 1</p>
+		<div id="players-wrapper">
+			<div id="human" class="player">
+				<p>human</p>
+				<div class="card-slot">
+					<img id="human-current-card" class="card-image" src="" alt="human - current card" hidden />
+				</div>
 			</div>
-			<div id="player-2" class="player">
-				<p>Player 2</p>
+			<div id="machine" class="player">
+				<p>machine</p>
+				<div class="card-slot">
+					<img id="machine-current-card" class="card-image" src="" alt="machine - current card" hidden />
+				</div>
 			</div>
 		</div>
 	</main>
 	<footer>
 		<div class="button-wrapper">
-			<button id="draw-two" class="btn hidden">Draw two cards</button>
+			<button id="draw-two" class="btn hidden">Draw</button>
 			<button id="new-deck" class="btn">start</button>
 		</div>
 	</footer>

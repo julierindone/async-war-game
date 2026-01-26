@@ -17,9 +17,8 @@ function handleClick() {
     })
     .then(() => {
       drawTwoBtn.classList.remove('hidden')
-      document.getElementById('players-wrapper').classList.remove('hidden')
+      playersWrapper.classList.remove('hidden')
       newDeck.innerText = "New Deck"
-    .then(() => drawTwoBtn.classList.remove('hidden'))
     })
 }
 
@@ -28,6 +27,11 @@ function drawTwo() {
     .then(res => res.json())
     .then(data => {
       cardsInPlay = data.cards
+
+      document.querySelectorAll('.card-image').forEach((instance, i) => {
+        instance.src = `${cardsInPlay[i].image}`
+        instance.removeAttribute('hidden')
+      })
       if (!(document.querySelector('.card-image'))) {
         document.querySelectorAll('.player').forEach((instance, i) => {
           let imageEl = document.createElement('img')
