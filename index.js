@@ -1,9 +1,10 @@
-let deckId;
-let cardsInPlay = [];
-
 const newDeck = document.getElementById('new-deck')
 const drawTwoBtn = document.getElementById('draw-two');
+const roundWinner = document.getElementById('round-winner')
+const playersWrapper = document.getElementById('players-wrapper')
 
+let deckId;
+let cardsInPlay = [];
 newDeck.addEventListener('click', handleClick)
 drawTwoBtn.addEventListener('click', drawTwo)
 
@@ -32,18 +33,24 @@ function drawTwo() {
         instance.src = `${cardsInPlay[i].image}`
         instance.removeAttribute('hidden')
       })
-      if (!(document.querySelector('.card-image'))) {
-        document.querySelectorAll('.player').forEach((instance, i) => {
-          let imageEl = document.createElement('img')
-          imageEl.src = `${cardsInPlay[i].image}`
-          imageEl.classList.add('card-image')
-          instance.appendChild(imageEl)
-        })
-      }
-      else {
-        document.querySelectorAll('.card-image').forEach((instance, i) => {
-          instance.src = `${cardsInPlay[i].image}`
-        })
-      }
+      roundWinner.innerText = getWinningCard(cardsInPlay[0], cardsInPlay[1])
+      roundWinner.removeAttribute('hidden')
     })
+}
+
+function getWinningCard(card1, card2) {
+  const cardValues = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "JACK", "QUEEN", "KING", "ACE"]
+
+  const cardOneValueIndex = cardValues.indexOf(card1.value)
+  const cardTwoValueIndex = cardValues.indexOf(card2.value)
+
+  if (cardOneValueIndex > cardTwoValueIndex) {
+    return `human wins!`
+  }
+  else if (cardTwoValueIndex > cardOneValueIndex) {
+    return `machine wins!`
+  }
+  else {
+    return `Its a war!`
+  }
 }

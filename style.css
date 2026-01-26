@@ -1,8 +1,10 @@
 :root {
+	--title-font: "Black Ops One", system-ui;
 	--thin-font: "Quantico", sans-serif;
 	--medium-font-size: clamp(1.15rem, 0.2rem + 6.5vw, 2.9rem);
-	--white: #f8f8f8;
+	--white: #ececec;
 	--black: #121212cc;
+	--red: hsl(345deg 100% 32.24% / 85%);
 	--black-accent: #000000dd;
 	--header-color: hsl(345, 49%, 12%);
 	--btn-color: hsl(345, 49%, 18%);
@@ -12,6 +14,7 @@
 		-0.1px 0.1px 0 #333,
 		-0.1px -0.1px 0 #333;
 	--borders: 1.5px solid var(--header-color);
+}
 
 /* =============================
 		LAYOUT
@@ -45,10 +48,10 @@ header {
 
 main {
 	flex: 1 auto 20%;
-}
-
-footer {
-	width: 100%;
+	flex: 1 1;
+	font-size: var(--medium-font-size);
+	height: 40vh;
+	justify-items: center;
 }
 
 /* =============================
@@ -57,6 +60,7 @@ footer {
 
 p,
 h1,
+h2,
 .btn {
 	text-transform: uppercase;
 	text-align: center;
@@ -86,11 +90,12 @@ span.break {
 	margin-inline: .37ch;
 }
 
-p.subheading {
+h2 {
 	font-family: var(--thin-font);
-	font-size: clamp(1rem, 8.9vw, 2.9em);
-	letter-spacing: 0.03em;
-	-webkit-text-stroke: 1.3px var(--header-color);
+	font-size: 1.2em;
+	font-weight: 700;
+	color: var(--red);
+	text-shadow: var(--black-text-shadow);
 }
 
 /* =============================
@@ -99,25 +104,37 @@ p.subheading {
 
 #players-wrapper {
 	display: flex;
-	column-gap: 1em;
-	margin-top: 1em;
-	align-items: center;
+	flex: 1 1;
+	width: 100%;
+	column-gap: min(2.2vw, 1.5em);
+	margin-top: 1.2vh;
 }
 
 .player {
-	flex: auto;
+	flex: 1 1;
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 0.2rem;
 	align-self: center;
 }
 
 .player > p {
+	flex: 1 1;
 	font-family: var(--thin-font);
-	font-size: var(--medium-font-size);
-	text-shadow: var(--black-text-shadow);
+	font-size: 1em;
+	font-weight: 500;
 	color: var(--white);
-	opacity: 0.85;
+	text-shadow: var(--black-text-shadow);
+	-webkit-text-stroke: 0.01em var(--white);
+}
+
+div.card-slot {
+	flex: 1 1;
+	display: flex;
+	border: 3px dotted var(--black);
+	border-radius: 17px;
+	aspect-ratio: 5/7;
+	padding: 0.576rem 0.45rem;
 }
 
 img.card-image {
@@ -128,11 +145,12 @@ img.card-image {
 		BUTTONS
 	============================== */
 
-div.button-wrapper {
+/* Commented out for scrimba only */
+/* div.button-wrapper {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.6em;
-}
+} */
 
 .btn {
 	display: block;
@@ -149,7 +167,8 @@ div.button-wrapper {
 	width: 100%;
 	height: 46px;
 	padding: .1em .25em;
-	margin-top: .5rem;
+	/* REMOVE - scrimba only */
+	/* margin-top: .5rem; */
 }
 
 .btn:hover {
@@ -204,15 +223,15 @@ div.button-wrapper {
 		margin: 0;
 	}
 
-
-/* =============================
-		BUTTONS
-	============================== */
+	#players-wrapper {
+		gap: 2.2rem;
+	}
 
 	.btn {
 		font-size: medium;
-		width: 15rem;
-		min-height: 55px;
+		/* Commented out for scrimba only (but I don't think I liked this width, either)*/
+		/* width: 15rem; */
+		/* min-height: 55px; */
 		margin-inline: auto;
 	}
 
