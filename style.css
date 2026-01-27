@@ -64,11 +64,6 @@ h2,
 	text-align: center;
 }
 
-p {
-	font-family: Arial, Helvetica, sans-serif;
-	font-weight: 500;
-}
-
 h1 {
 	font-family: var(--title-font);
 	font-size: clamp(1.5rem, -0.2rem + 33.5vw, 13em);
@@ -111,9 +106,9 @@ h2 {
 #players-wrapper {
 	display: flex;
 	flex: 1 1;
-	width: 100%;
+	width: min(460px, 100%);
 	column-gap: min(2.2vw, 1.5em);
-	margin-top: 1.2vh;
+	padding-inline: 1.5vw;
 }
 
 .player {
@@ -125,22 +120,15 @@ h2 {
 }
 
 .player > p {
-	flex: 1 1;
-	font-family: var(--thin-font);
 	font-size: 1em;
-	font-weight: 500;
-	color: var(--white);
-	text-shadow: var(--black-text-shadow);
-	-webkit-text-stroke: 0.01em var(--white);
 }
 
 div.card-slot {
-	flex: 1 1;
 	display: flex;
 	border: 3px dotted var(--black);
-	border-radius: 17px;
+	border-radius: 15px;
 	aspect-ratio: 5/7;
-	padding: 0.576rem 0.45rem;
+	padding: 0.16em 0.175em;
 }
 
 img.card-image {
@@ -187,6 +175,17 @@ img.card-image {
 	background: linear-gradient(to bottom, color-mix(in srgb, var(--btn-color), black 30%), color-mix(in srgb, var(--btn-color), black 74%));
 }
 
+#nav-wrapper > .btn {
+	--btn-color: hsl(345, 39%, 18%);
+	font-size: 0.825em;
+	height: 66%;
+	width: unset;
+	-webkit-text-stroke: 0.01em var(--header-color);
+	border-color: hsla(50, 100%, 65%, 0.8);
+	border-radius: 5px;
+	padding-inline: 1em;
+	margin: 0;
+}
 
 .hidden {
 	display: none !important;
@@ -227,11 +226,16 @@ img.card-image {
 	}
 
 	#players-wrapper {
-		gap: 2.2rem;
+		gap: 2rem;
+		width: 90%;
+	}
+
+	div.card-slot {
+		border-width: 4px;
 	}
 
 	.btn {
-		font-size: medium;
+		font-size: 1.025rem;
 		/* Commented out for scrimba only (but I don't think I liked this width, either)*/
 		/* width: 15rem; */
 		/* min-height: 55px; */
@@ -258,8 +262,12 @@ img.card-image {
 	}
 
 	#players-wrapper {
-		width: 74%;
-		gap: 1.8em;
+		width: min(700px, 80%);
+		gap: 3rem;
+	}
+
+	.player {
+		gap: 0;
 	}
 
 	footer {
