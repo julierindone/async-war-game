@@ -20,26 +20,39 @@ function handleClick() {
       deckId = data.deck_id
     })
     .then(() => {
-      drawTwoBtn.classList.remove('hidden')
-      newDeck.innerText = "New Deck"
       navWrapper.appendChild(newDeck)
+      newDeck.innerText = "New Deck"
+      drawTwoBtn.classList.remove('hidden')
+      newDeck.classList.remove('fancy-yellow')
     })
 }
 
-function drawTwo() {
-  return fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw?count=2`)
-    .then(res => res.json())
-    .then(data => {
-      remainingCount = data.remaining
-      cardsInPlay = data.cards
 
-      document.querySelectorAll('.card-image').forEach((instance, i) => {
-        instance.src = `${cardsInPlay[i].image}`
+
+function drawTwo() {
+  if (remainingCount === 0) {
+    roundWinner.classList.add('game-over')
+    roundWinner.innerText = 'Game over!'
+    drawTwoBtn.classList.add('hidden')
+    buttonWrapper.appendChild(newDeck)
+    newDeck.classList.add('fancy-yellow')
+    newDeck.innerText = 'start new game'
+  }
+
+  else {
+    return fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw?count=2`)
+      .then(res => res.json())
+      .then(data => {
+        remainingCount = data.remaining
+        cardsInPlay = data.cards
+
+        document.querySelectorAll('.card-image').forEach((instance, i) => {
+          instance.src = `${cardsInPlay[i].image}`
+        })
+        roundWinner.innerText = getWinningCard(cardsInPlay[0], cardsInPlay[1])
+        remainingCards.innerText = `remaining: ${remainingCount}`
       })
-      roundWinner.innerText = getWinningCard(cardsInPlay[0], cardsInPlay[1])
-      roundWinner.removeAttribute('hidden')
-      remainingCards.innerText = `remaining: ${remainingCount}`
-    })
+  }
 }
 
 function getWinningCard(card1, card2) {
@@ -64,6 +77,7 @@ function newDeckReset() {
     cardImages[i].src = 'images/card_back.png'
     cardImages[i].removeAttribute('hidden')
   }
+  roundWinner.classList.remove('game-over')
   roundWinner.innerText = "a new game starts now";
   remainingCount = 52
   remainingCards.innerText = 'remaining: 52'
