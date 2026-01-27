@@ -5,8 +5,8 @@
 	--medium-font-size: clamp(0.7rem, 0.45rem + 3.5vw, 2rem);
 	--white: #ececec;
 	--black: #121212cc;
-	--red: hsl(345deg 100% 32.24% / 90%);
-	--yellow: hsla(50, 100%, 65%, 0.8);
+	--red: hsl(345, 100%, 32%, 0.9);
+	--yellow: hsl(50, 100%, 65%, 0.8);
 	--header-color: hsl(345, 49%, 16%);
 	--btn-color: hsl(345, 49%, 20%);
 	--black-text-shadow:
@@ -27,7 +27,7 @@ body {
 	align-items: center;
 	gap: 0.8rem;
 	background-color: rgb(77, 153, 107);
-	background: url('images/table.png') no-repeat center / cover;
+	background: url('img/table.png') no-repeat center / cover;
 	padding-block: max(5.7vh, 2.9rem) max(1rem, 1.4dvh);
 	padding-inline: 3%;
 }
@@ -70,8 +70,10 @@ header {
 
 main {
 	flex: 14 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	font-size: var(--medium-font-size);
-	justify-items: center;
 }
 
 /* =============================
@@ -109,6 +111,11 @@ span.break {
 	margin-inline: .37ch;
 }
 
+#round-winner {
+	flex: 1 1;
+	min-height: 1em;
+}
+
 h2 {
 	font-family: var(--thin-font);
 	font-size: 1.175em;
@@ -116,12 +123,24 @@ h2 {
 	color: var(--red);
 	text-shadow: var(--black-text-shadow);
 	text-wrap: pretty;
-	line-height: 1.15;
-	margin-bottom: 1.4dvh;
 }
 
-.game-over {
-	font-size: 1.65em;
+h2.click-start {
+	font-size: clamp(.8rem, 0.4rem + 8.1vw, 3.5rem);
+	text-transform: none;
+	font-variant: small-caps;
+
+}
+
+span.game-over {
+	font-size: 1.5em;
+	margin-top: 0.2em;
+}
+
+/* disable draw-two button */
+button.game-over {
+	--btn-color: hsl(345, 39%, 30%);
+	opacity: 55%;
 }
 
 p {
@@ -174,12 +193,11 @@ img.card-image {
 		BUTTONS
 	============================== */
 
-/* Commented out for scrimba only */
-/* div.button-wrapper {
+#button-wrapper {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.6em;
-} */
+	gap: 0.8em;
+}
 
 .btn {
 	display: block;
@@ -198,19 +216,23 @@ img.card-image {
 	padding: .1em .25em;
 }
 
-.fancy-yellow {
-	border: 1px solid var(--yellow);
-	box-shadow: 0 0 15px var(--yellow);
-}
-
-.btn:hover {
+button:hover {
 	background: linear-gradient(to bottom, color-mix(in srgb, var(--btn-color), black 20%), color-mix(in srgb, var(--btn-color), black 64%));
 }
 
-.btn:active {
+button:active {
 	transform: translateY(1px);
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	background: linear-gradient(to bottom, color-mix(in srgb, var(--btn-color), black 30%), color-mix(in srgb, var(--btn-color), black 74%));
+}
+
+button:disabled {
+	cursor: not-allowed;
+}
+
+button.fancy-yellow {
+	border: 1px solid var(--yellow);
+	box-shadow: 0 0 15px var(--yellow);
 }
 
 #nav-wrapper > .btn {
@@ -317,7 +339,7 @@ img.card-image {
 
 	#players-wrapper {
 		width: min(700px, 80%);
-		gap: 3rem;
+		gap: 3.2rem;
 	}
 
 	footer {
@@ -326,3 +348,22 @@ img.card-image {
 	}
 }
 
+/* @media (height < 650px) and (width > 500px) {
+	header {
+		gap: 0.9rem;
+	}
+
+	h1 {
+		font-size: 6.1rem;
+	}
+
+	p.subheading {
+		font-size: 2.4rem;
+		letter-spacing: unset;
+	}
+
+	.btn {
+		font-size: 1rem;
+		height: 46px;
+	}
+} */

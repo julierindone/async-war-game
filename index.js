@@ -4,6 +4,7 @@ const newDeck = document.getElementById('new-deck')
 const drawTwoBtn = document.getElementById('draw-two');
 const roundWinner = document.getElementById('round-winner')
 const remainingCards = document.getElementById('remaining-cards')
+const buttonWrapper = document.getElementById('button-wrapper')
 
 let deckId;
 let remainingCount;
@@ -23,36 +24,35 @@ function handleClick() {
       navWrapper.appendChild(newDeck)
       newDeck.innerText = "New Deck"
       drawTwoBtn.classList.remove('hidden')
+      drawTwoBtn.classList.add('fancy-yellow')
       newDeck.classList.remove('fancy-yellow')
+      roundWinner.classList.remove('click-start')
     })
 }
 
-
-
 function drawTwo() {
-  if (remainingCount === 0) {
-    roundWinner.classList.add('game-over')
-    roundWinner.innerText = 'Game over!'
-    drawTwoBtn.classList.add('hidden')
-    buttonWrapper.appendChild(newDeck)
-    newDeck.classList.add('fancy-yellow')
-    newDeck.innerText = 'start new game'
-  }
+  drawTwoBtn.classList.remove('fancy-yellow')
 
-  else {
-    return fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw?count=2`)
-      .then(res => res.json())
-      .then(data => {
-        remainingCount = data.remaining
-        cardsInPlay = data.cards
+  return fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw?count=2`)
+    .then(res => res.json())
+    .then(data => {
+      remainingCount = data.remaining
+      cardsInPlay = data.cards
 
-        document.querySelectorAll('.card-image').forEach((instance, i) => {
-          instance.src = `${cardsInPlay[i].image}`
-        })
-        roundWinner.innerText = getWinningCard(cardsInPlay[0], cardsInPlay[1])
-        remainingCards.innerText = `remaining: ${remainingCount}`
+      document.querySelectorAll('.card-image').forEach((instance, i) => {
+        instance.src = `${cardsInPlay[i].image}`
       })
-  }
+      roundWinner.innerHTML = getWinningCard(cardsInPlay[0], cardsInPlay[1])
+      remainingCards.innerText = `remaining: ${remainingCount}`
+      if (remainingCount === 48) {
+        buttonWrapper.appendChild(newDeck)
+        roundWinner.innerHTML += '<br><span class="game-over">Game over!</span>'
+        drawTwoBtn.classList.add('game-over')
+        newDeck.classList.add('fancy-yellow')
+        newDeck.innerText = 'start new game'
+        drawTwoBtn.disabled = true
+      }
+    })
 }
 
 function getWinningCard(card1, card2) {
@@ -74,11 +74,13 @@ function getWinningCard(card1, card2) {
 
 function newDeckReset() {
   for (let i = 0; i < cardImages.length; i++) {
-    cardImages[i].src = 'images/card_back.png'
+    cardImages[i].src = 'img/card_back.png'
     cardImages[i].removeAttribute('hidden')
   }
   roundWinner.classList.remove('game-over')
-  roundWinner.innerText = "a new game starts now";
+  drawTwoBtn.classList.remove('game-over')
+  drawTwoBtn.disabled = false;
+  roundWinner.innerHTML = "a new game has begun!<br>click below to draw.";
   remainingCount = 52
   remainingCards.innerText = 'remaining: 52'
 }
