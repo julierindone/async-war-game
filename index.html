@@ -18,19 +18,23 @@
 		</div>
 	</nav>
 	<header>
-		<p id="subheading" class="subheading">LET'S<span class="break"><br></span>PLAY</p>
+		<p id="subheading" class="subheading">
+			LET'S<span class="break"><br></span>PLAY
+		</p>
 		<h1>WAR</h1>
 	</header>
 	<main>
 		<div id="players-wrapper">
 			<div id="human" class="player">
-				<p>human</p>
+				<p class="player-name">human</p>
+				<p id="human-point-display" class="point-display">Points: 0</p>
 				<div class="card-slot">
 					<img id="human-current-card" class="card-image" src="img/card_back.png" alt="human - current card" hidden />
 				</div>
 			</div>
 			<div id="machine" class="player">
-				<p>machine</p>
+				<p class="player-name">machine</p>
+				<p id="machine-point-display" class="point-display">Points: 0</p>
 				<div class="card-slot">
 					<img id="machine-current-card" class="card-image" src="img/card_back.png" alt="machine - current card" hidden />
 				</div>
@@ -39,8 +43,8 @@
 		<h2 id="round-winner" class="click-start">click START to begin</h2>
 	</main>
 	<footer id="button-wrapper">
-			<button id="draw-two" class="btn hidden fancy-yellow">Draw 2 cards</button>
-			<button id="new-deck" class="btn fancy-yellow">start</button>
+		<button id="draw-two" class="btn hidden fancy-yellow">Draw 2 cards</button>
+		<button id="new-deck" class="btn fancy-yellow">start</button>
 	</footer>
 	<script src="index.js"></script>
 </body>
