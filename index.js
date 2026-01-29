@@ -17,54 +17,52 @@ let machinePointCount = 0
 newDeck.addEventListener('click', handleClick)
 drawTwoBtn.addEventListener('click', drawTwo)
 
-function handleClick() {
+async function handleClick() {
   newDeckReset()
-  fetch('https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/')
-    .then(res => res.json())
-    .then(data => {
-      deckId = data.deck_id
-    })
-    .then(() => {
-      roundWinner.classList.remove('click-start')
-      navWrapper.appendChild(newDeck)
-      newDeck.innerText = "New Deck"
-      drawTwoBtn.classList.remove('hidden')
-      drawTwoBtn.classList.add('fancy-yellow')
-      newDeck.classList.remove('fancy-yellow')
-    })
+
+  const response = await fetch('https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/')
+  const data = await response.json()
+
+  deckId = data.deck_id
+  roundWinner.classList.remove('click-start')
+  navWrapper.appendChild(newDeck)
+  newDeck.innerText = "New Deck"
+  drawTwoBtn.classList.remove('hidden')
+  drawTwoBtn.classList.add('fancy-yellow')
+  newDeck.classList.remove('fancy-yellow')
 }
 
-function drawTwo() {
+async function drawTwo() {
   drawTwoBtn.classList.remove('fancy-yellow')
 
-  return fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw?count=2`)
-    .then(res => res.json())
-    .then(data => {
-      remainingCount = data.remaining
-      cardsInPlay = data.cards
+  const response = await fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw?count=2`)
+  const data = await response.json()
 
-      document.querySelectorAll('.card-image').forEach((instance, i) => {
-        instance.src = `${cardsInPlay[i].image}`
-      })
-      roundWinner.innerHTML = determineCardWinner(cardsInPlay[0], cardsInPlay[1])
-      remainingCards.innerText = `remaining: ${remainingCount}`
-      if (remainingCount === 44) {
-        if (humanPointCount > machinePointCount) {
-          roundWinner.innerHTML = `<span class="game-over">The human has won!</span>`
-        }
-        else if (humanPointCount < machinePointCount) {
-          roundWinner.innerHTML = `<span class="game-over">The machine has won!</span>`
-        }
-        else {
-          roundWinner.innerHTML = `<span class="game-over">It's a tie!</span>`
+  remainingCount = data.remaining
+  cardsInPlay = data.cards
 
-        }
-        buttonWrapper.appendChild(newDeck)
-        newDeck.classList.add('fancy-yellow')
-        newDeck.innerText = 'start new game'
-        drawTwoBtn.disabled = true
-      }
-    })
+  document.querySelectorAll('.card-image').forEach((instance, i) => {
+    instance.src = `${cardsInPlay[i].image}`
+  })
+
+  roundWinner.innerHTML = determineCardWinner(cardsInPlay[0], cardsInPlay[1])
+  remainingCards.innerText = `remaining: ${remainingCount}`
+  if (remainingCount === 0) {
+    if (humanPointCount > machinePointCount) {
+      roundWinner.innerHTML = `<span class="game-over">The human has won!</span>`
+    }
+    else if (humanPointCount < machinePointCount) {
+      roundWinner.innerHTML = `<span class="game-over">The machine has won!</span>`
+    }
+    else {
+      roundWinner.innerHTML = `<span class="game-over">It's a tie!</span>`
+
+    }
+    buttonWrapper.appendChild(newDeck)
+    newDeck.classList.add('fancy-yellow')
+    newDeck.innerText = 'start new game'
+    drawTwoBtn.disabled = true
+  }
 }
 
 function determineCardWinner(card1, card2) {
@@ -98,16 +96,8 @@ function newDeckReset() {
   humanPointDisplay.innerText = `Points: ${humanPointCount}`
   machinePointDisplay.innerText = `Points: ${machinePointCount}`
   roundWinner.classList.remove('game-over')
-  drawTwoBtn.classList.remove('game-over')
   drawTwoBtn.disabled = false;
   remainingCount = 52
   remainingCards.innerText = 'remaining: 52'
   roundWinner.innerHTML = "a new game has begun!<br>click below to draw.";
 }
-
-/**
- * Challenge:
- *
- * Display the final winner in the header at the top by
- * replacing the text of the h2.
- */
